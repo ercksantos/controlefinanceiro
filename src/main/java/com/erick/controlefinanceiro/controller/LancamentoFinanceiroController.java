@@ -1,7 +1,7 @@
 package com.erick.controlefinanceiro.controller;
 
 import com.erick.controlefinanceiro.domain.LancamentoFinanceiro;
-import com.erick.controlefinanceiro.repository.LancamentoFinanceiroRepository;
+import com.erick.controlefinanceiro.service.LancamentoFinanceiroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +14,17 @@ import java.util.List;
 public class LancamentoFinanceiroController {
 
     @Autowired
-    private LancamentoFinanceiroRepository repository;
+    private LancamentoFinanceiroService service;
 
     @PostMapping
     public ResponseEntity<LancamentoFinanceiro> salvar(@RequestBody LancamentoFinanceiro lancamento) {
-        LancamentoFinanceiro salvo = repository.save(lancamento);
+        LancamentoFinanceiro salvo = service.salvar(lancamento);
         return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
     }
 
     @GetMapping
     public ResponseEntity<List<LancamentoFinanceiro>> listarTodos() {
-        List<LancamentoFinanceiro> lancamentos = repository.findAll();
+        List<LancamentoFinanceiro> lancamentos = service.listarTodos();
         return ResponseEntity.ok(lancamentos);
     }
 }
