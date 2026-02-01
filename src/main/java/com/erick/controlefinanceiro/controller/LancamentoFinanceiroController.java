@@ -1,6 +1,7 @@
 package com.erick.controlefinanceiro.controller;
 
-import com.erick.controlefinanceiro.domain.LancamentoFinanceiro;
+import com.erick.controlefinanceiro.dto.LancamentoFinanceiroRequestDTO;
+import com.erick.controlefinanceiro.dto.LancamentoFinanceiroResponseDTO;
 import com.erick.controlefinanceiro.service.LancamentoFinanceiroService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,14 +18,14 @@ public class LancamentoFinanceiroController {
     private LancamentoFinanceiroService service;
 
     @PostMapping
-    public ResponseEntity<LancamentoFinanceiro> salvar(@RequestBody LancamentoFinanceiro lancamento) {
-        LancamentoFinanceiro salvo = service.salvar(lancamento);
-        return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
+    public ResponseEntity<LancamentoFinanceiroResponseDTO> salvar(@RequestBody LancamentoFinanceiroRequestDTO requestDTO) {
+        LancamentoFinanceiroResponseDTO responseDTO = service.salvar(requestDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
 
     @GetMapping
-    public ResponseEntity<List<LancamentoFinanceiro>> listarTodos() {
-        List<LancamentoFinanceiro> lancamentos = service.listarTodos();
+    public ResponseEntity<List<LancamentoFinanceiroResponseDTO>> listarTodos() {
+        List<LancamentoFinanceiroResponseDTO> lancamentos = service.listarTodos();
         return ResponseEntity.ok(lancamentos);
     }
 }
