@@ -3,6 +3,7 @@ package com.erick.controlefinanceiro.controller;
 import com.erick.controlefinanceiro.dto.LancamentoFinanceiroRequestDTO;
 import com.erick.controlefinanceiro.dto.LancamentoFinanceiroResponseDTO;
 import com.erick.controlefinanceiro.service.LancamentoFinanceiroService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +19,7 @@ public class LancamentoFinanceiroController {
     private LancamentoFinanceiroService service;
 
     @PostMapping
-    public ResponseEntity<LancamentoFinanceiroResponseDTO> salvar(@RequestBody LancamentoFinanceiroRequestDTO requestDTO) {
+    public ResponseEntity<LancamentoFinanceiroResponseDTO> salvar(@Valid @RequestBody LancamentoFinanceiroRequestDTO requestDTO) {
         LancamentoFinanceiroResponseDTO responseDTO = service.salvar(requestDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(responseDTO);
     }
